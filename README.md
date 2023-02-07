@@ -3,9 +3,9 @@
 ## UnicornStack
 
 ## Steps
-!@#$%^&*()
 * Create sveltekit web app using
 
+```
 npm create svelte@latest unicornstack-web
 
 ==> npm create svelte@latest unicornstack-web
@@ -42,4 +42,5 @@ Next steps:
 To close the dev server, hit Ctrl-C
 
 Stuck? Visit us at https://svelte.dev/chat
+```
 
