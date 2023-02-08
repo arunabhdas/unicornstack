@@ -2,6 +2,12 @@
 
 ## UnicornStack
 
+## Screenshots
+
+![Screenshot 1](https://github.com/arunabhdas/unicornstack/blob/main/screenshots/screenshot_1.png)
+![Screenshot 1](https://github.com/arunabhdas/unicornstack/blob/main/screenshots/screenshot_2.png)
+
+
 ## Steps
 * Create sveltekit web app using
 
