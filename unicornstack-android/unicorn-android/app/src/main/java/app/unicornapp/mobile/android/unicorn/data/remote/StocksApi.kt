@@ -7,7 +7,7 @@ import retrofit2.http.Query
 /**
  * StockApi
  */
-interface StockApi {
+interface StocksApi {
     suspend fun getListings(
         @Query("apikey") apiKey: String
     ): ResponseBody
@@ -16,5 +16,4 @@ interface StockApi {
         val API_KEY = BuildConfig.API_KEY
         val STOCKS_BASE_URL = BuildConfig.STOCKS_BASE_URL
     }
-
 }
