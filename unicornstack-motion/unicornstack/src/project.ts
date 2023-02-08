@@ -1,8 +1,7 @@
 import {makeProject} from '@motion-canvas/core/lib';
-
-import example from './scenes/example?scene';
+import unicornstack from './scenes/unicornstack?scene';
 
 export default makeProject({
-  scenes: [example],
+  scenes: [unicornstack],
   background: '#141414',
 });
