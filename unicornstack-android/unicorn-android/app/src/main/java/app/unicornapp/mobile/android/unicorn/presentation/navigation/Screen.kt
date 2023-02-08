@@ -1,4 +1,4 @@
-package app.unicornapp.mobile.android.unicorn.ui.navigation
+package app.unicornapp.mobile.android.unicorn.presentation.navigation
 
 /**
  * Created by Das on 2022-11-05.

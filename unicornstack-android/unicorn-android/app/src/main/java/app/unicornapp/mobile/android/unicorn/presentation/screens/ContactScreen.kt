@@ -1,4 +1,4 @@
-package app.unicornapp.mobile.android.unicorn.ui.screens
+package app.unicornapp.mobile.android.unicorn.presentation.screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -17,11 +17,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import app.unicornapp.mobile.android.unicorn.R
-import app.unicornapp.mobile.android.unicorn.ui.navigation.Screen
-
+import app.unicornapp.mobile.android.unicorn.presentation.navigation.Screen
 
 @Composable
-fun HomeDetailScreen(
+fun ContactScreen(
     navController: NavController
 ) {
     Box(
@@ -30,20 +29,20 @@ fun HomeDetailScreen(
     ) {
         Image(
             painterResource(
-            id = R.drawable.banner_bg_2),
+                id = R.drawable.banner_bg_2),
             contentDescription = "",
             contentScale = ContentScale.FillBounds,
             modifier = Modifier.matchParentSize()
         )
         Text(
             modifier = Modifier.clickable {
-               navController.navigate(Screen.HomeScreen.route) {
-                   popUpTo(Screen.HomeScreen.route) {
-                       inclusive = true
-                   }
-               }
+                navController.navigate(Screen.HomeScreen.route) {
+                    popUpTo(Screen.HomeScreen.route) {
+                        inclusive = true
+                    }
+                }
             },
-            text = "Detail",
+            text = "Contact",
             color = Color.White,
             fontSize = MaterialTheme.typography.titleSmall.fontSize,
             fontWeight = FontWeight.Bold
@@ -54,6 +53,6 @@ fun HomeDetailScreen(
 
 @Preview
 @Composable
-fun HomeDetailScreenPreview() {
-    HomeDetailScreen(navController = rememberNavController())
+fun ContactScreenPreview() {
+    ContactScreen(navController = rememberNavController())
 }

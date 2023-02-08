@@ -27,12 +27,11 @@ import androidx.core.view.WindowCompat
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import app.unicornapp.mobile.android.unicorn.ui.navigation.MenuItem
-import app.unicornapp.mobile.android.unicorn.ui.navigation.CustomAppBar
-import app.unicornapp.mobile.android.unicorn.ui.navigation.DrawerBody
-import app.unicornapp.mobile.android.unicorn.ui.navigation.DrawerHeader
-import app.unicornapp.mobile.android.unicorn.ui.navigation.SetupNavGraph
-import app.unicornapp.mobile.android.unicorn.ui.theme.UnicornTheme
+import app.unicornapp.mobile.android.unicorn.presentation.navigation.MenuItem
+import app.unicornapp.mobile.android.unicorn.presentation.navigation.CustomAppBar
+import app.unicornapp.mobile.android.unicorn.presentation.navigation.DrawerBody
+import app.unicornapp.mobile.android.unicorn.presentation.navigation.SetupNavGraph
+import app.unicornapp.mobile.android.unicorn.presentation.theme.UnicornTheme
 import app.unicornapp.mobile.android.unicorn.viewmodel.UnicornViewModel
 import kotlinx.coroutines.launch
 
@@ -80,10 +79,10 @@ fun MyApp(
                         icon = Icons.Default.Home
                     ),
                     MenuItem(
-                        id = "contact",
-                        title = "Contact",
-                        route = "contact_screen",
-                        contentDescription = "Navigate to Contact",
+                        id = "services",
+                        title = "Services",
+                        route = "services_screen",
+                        contentDescription = "Navigate to Services",
                         icon = Icons.Default.Email
                     ),
                     MenuItem(

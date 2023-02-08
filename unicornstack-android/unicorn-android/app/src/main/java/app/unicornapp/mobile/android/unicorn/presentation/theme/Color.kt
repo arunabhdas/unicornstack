@@ -1,4 +1,4 @@
-package app.unicornapp.mobile.android.unicorn.ui.theme
+package app.unicornapp.mobile.android.unicorn.presentation.theme
 
 import androidx.compose.ui.graphics.Color
 
