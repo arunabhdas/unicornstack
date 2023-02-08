@@ -3,6 +3,10 @@ plugins {
     id 'org.jetbrains.kotlin.android'
 }
 
+def localPropertiesFile = rootProject.file("local.properties")
+def localProperties = new Properties()
+localProperties.load(new FileInputStream(localPropertiesFile))
+
 android {
     namespace 'app.unicornapp.mobile.android.unicorn'
     compileSdk 33
@@ -18,7 +22,8 @@ android {
         vectorDrawables {
             useSupportLibrary true
         }
-        // TODO-FIXME buildConfigField "String", "API_KEY", localProperties['apiKey']
+        buildConfigField("String", "API_KEY", localProperties['apiKey'])
+        buildConfigField("String", "STOCKS_BASE_URL", localProperties['stocksBaseUrl'])
     }
 
     buildTypes {
