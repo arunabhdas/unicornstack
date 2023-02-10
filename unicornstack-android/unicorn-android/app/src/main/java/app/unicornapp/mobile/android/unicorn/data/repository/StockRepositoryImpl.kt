@@ -2,6 +2,8 @@ package app.unicornapp.mobile.android.unicorn.data.repository
 
 import app.unicornapp.mobile.android.unicorn.data.local.StockDatabase
 import app.unicornapp.mobile.android.unicorn.data.mapper.toStockListing
+import app.unicornapp.mobile.android.unicorn.data.mapper.toStockListingEntity
+import app.unicornapp.mobile.android.unicorn.data.parser.CsvParser
 import app.unicornapp.mobile.android.unicorn.data.remote.StocksApi
 import app.unicornapp.mobile.android.unicorn.domain.model.StockListing
 import app.unicornapp.mobile.android.unicorn.domain.repository.StockRepository
@@ -19,7 +21,8 @@ import javax.inject.Singleton
 @Singleton
 class StockRepositoryImpl @Inject constructor(
     val stockApi: StocksApi,
-    val db: StockDatabase
+    val db: StockDatabase,
+    val stockListingsParser: CsvParser<StockListing>
 ): StockRepository {
     private val dao = db.dao
     override suspend fun getStockListings(
@@ -43,13 +46,29 @@ class StockRepositoryImpl @Inject constructor(
             }
             val remoteListings = try {
                 val response = stockApi.getListings()
-                response.byteStream()
+                stockListingsParser.parse(response.byteStream())
             } catch (e: IOException) {
                 e.printStackTrace()
                 emit(Resource.Error("Could not load data"))
+                null
             } catch (e: HttpException) {
                 e.printStackTrace()
                 emit(Resource.Error("Could not load data"))
+                null
+            }
+
+            remoteListings?.let {listings ->
+                dao.clearStockListings()
+                dao.insertStockListings(
+                    listings.map { stockListing ->
+                        stockListing.toStockListingEntity()
+                    }
+                )
+                emit(Resource.Succes(
+                    data = dao.searchStockListing("")
+                        .map { it.toStockListing() }
+                ))
+                emit(Resource.Loading(false))
             }
         }
     }
