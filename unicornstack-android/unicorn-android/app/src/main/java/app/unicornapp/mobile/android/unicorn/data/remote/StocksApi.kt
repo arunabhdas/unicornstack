@@ -9,7 +9,7 @@ import retrofit2.http.Query
  */
 interface StocksApi {
     suspend fun getListings(
-        @Query("apikey") apiKey: String
+        @Query("apikey") apiKey: String = API_KEY
     ): ResponseBody
 
     companion object {
