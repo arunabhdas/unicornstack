@@ -14,7 +14,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 /**
- * StockListingsViewModel
+ * CompanyListingsViewModel
  */
 @HiltViewModel
 class CompanyListingsViewModel @Inject constructor(
