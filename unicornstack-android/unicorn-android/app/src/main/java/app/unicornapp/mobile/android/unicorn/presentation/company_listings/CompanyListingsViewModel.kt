@@ -9,6 +9,7 @@ import app.unicornapp.mobile.android.unicorn.domain.repository.StockRepository
 import app.unicornapp.mobile.android.unicorn.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -27,20 +28,24 @@ class CompanyListingsViewModel @Inject constructor(
             is CompanyListingsEvent.Refresh -> {
                 getCompanyListings(fetchFromRemote = true)
             }
-
             is CompanyListingsEvent.OnSearchQueryChange -> {
-
+                state = state.copy(searchQuery = event.query)
+                searchJob?.cancel()
+                searchJob = viewModelScope.launch {
+                    delay(500L)
+                    getCompanyListings()
+                }
             }
         }
     }
 
-    fun getCompanyListings(
+    private fun getCompanyListings(
         query: String = state.searchQuery.lowercase(),
         fetchFromRemote: Boolean = false
     ) {
         viewModelScope.launch {
             repository
-                .getStockListings(fetchFromRemote, query)
+                .getCompanyListings(fetchFromRemote, query)
                 .collect { result ->
                     when (result) {
                         is Resource.Succes -> {

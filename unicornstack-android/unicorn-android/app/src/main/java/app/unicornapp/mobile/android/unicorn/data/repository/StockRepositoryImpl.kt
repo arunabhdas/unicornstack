@@ -25,7 +25,7 @@ class StockRepositoryImpl @Inject constructor(
     val csvParser: CsvParser<CompanyListing>
 ): StockRepository {
     private val dao = db.dao
-    override suspend fun getStockListings(
+    override suspend fun getCompanyListings(
         fetchFromRemote: Boolean,
         query: String
     ): Flow<Resource<List<CompanyListing>>> {
