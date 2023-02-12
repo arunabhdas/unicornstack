@@ -1,11 +1,11 @@
 package app.unicornapp.mobile.android.unicorn.data.repository
 
 import app.unicornapp.mobile.android.unicorn.data.local.StockDatabase
-import app.unicornapp.mobile.android.unicorn.data.mapper.toStockListing
-import app.unicornapp.mobile.android.unicorn.data.mapper.toStockListingEntity
+import app.unicornapp.mobile.android.unicorn.data.mapper.toCompanyListing
+import app.unicornapp.mobile.android.unicorn.data.mapper.toCompanyListingEntity
 import app.unicornapp.mobile.android.unicorn.data.parser.CsvParser
 import app.unicornapp.mobile.android.unicorn.data.remote.StocksApi
-import app.unicornapp.mobile.android.unicorn.domain.model.StockListing
+import app.unicornapp.mobile.android.unicorn.domain.model.CompanyListing
 import app.unicornapp.mobile.android.unicorn.domain.repository.StockRepository
 import app.unicornapp.mobile.android.unicorn.util.Resource
 import kotlinx.coroutines.flow.Flow
@@ -22,19 +22,19 @@ import javax.inject.Singleton
 class StockRepositoryImpl @Inject constructor(
     val stockApi: StocksApi,
     val db: StockDatabase,
-    val stockListingsParser: CsvParser<StockListing>
+    val csvParser: CsvParser<CompanyListing>
 ): StockRepository {
     private val dao = db.dao
     override suspend fun getStockListings(
         fetchFromRemote: Boolean,
         query: String
-    ): Flow<Resource<List<StockListing>>> {
+    ): Flow<Resource<List<CompanyListing>>> {
         return flow {
             emit(Resource.Loading(true))
-            val localListings = dao.searchStockListing(query)
+            val localListings = dao.searchCompanyListing(query)
             emit(Resource.Succes(
-                data = localListings.map { stockListingEntity ->
-                   stockListingEntity.toStockListing()
+                data = localListings.map { entity ->
+                   entity.toCompanyListing()
                 }
             ))
             val isDbEmpty = localListings.isEmpty() && query.isBlank()
@@ -46,7 +46,7 @@ class StockRepositoryImpl @Inject constructor(
             }
             val remoteListings = try {
                 val response = stockApi.getListings()
-                stockListingsParser.parse(response.byteStream())
+                csvParser.parse(response.byteStream())
             } catch (e: IOException) {
                 e.printStackTrace()
                 emit(Resource.Error("Could not load data"))
@@ -58,15 +58,17 @@ class StockRepositoryImpl @Inject constructor(
             }
 
             remoteListings?.let {listings ->
-                dao.clearStockListings()
-                dao.insertStockListings(
-                    listings.map { stockListing ->
-                        stockListing.toStockListingEntity()
+                dao.clearCompanyListings()
+                dao.insertConpanyListings(
+                    listings.map { listing ->
+                        listing.toCompanyListingEntity()
                     }
                 )
                 emit(Resource.Succes(
-                    data = dao.searchStockListing("")
-                        .map { it.toStockListing() }
+                    data = dao.searchCompanyListing("")
+                        .map { entity ->
+                            entity.toCompanyListing()
+                        }
                 ))
                 emit(Resource.Loading(false))
             }

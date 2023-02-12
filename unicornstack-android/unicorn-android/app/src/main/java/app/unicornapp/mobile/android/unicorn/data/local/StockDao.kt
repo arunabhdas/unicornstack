@@ -12,21 +12,21 @@ import androidx.room.Query
 interface StockDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertStockListings(
-        stockListingEntities: List<StockListingEntity>
+    suspend fun insertConpanyListings(
+        companyListingEntities: List<CompanyListingEntity>
     )
 
-    @Query("DELETE FROM stocklistingentity")
-    suspend fun clearStockListings()
+    @Query("DELETE FROM companylistingentity")
+    suspend fun clearCompanyListings()
 
     @Query(
         """
             SELECT *
-            FROM stocklistingentity
+            FROM companylistingentity
             WHERE LOWER(name) LIKE '%' || LOWER(:query) || '%' OR
             UPPER(:query) == symbol
         """
     )
-    suspend fun searchStockListing(query: String): List<StockListingEntity>
+    suspend fun searchCompanyListing(query: String): List<CompanyListingEntity>
 
 }

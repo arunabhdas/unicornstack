@@ -8,7 +8,7 @@ import androidx.room.RoomDatabase
  */
 
 @Database(
-    entities = [StockListingEntity::class],
+    entities = [CompanyListingEntity::class],
     version = 1
 
 )

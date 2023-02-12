@@ -1,7 +1,7 @@
 package app.unicornapp.mobile.android.unicorn.data.parser
 
 import java.io.InputStream
-import app.unicornapp.mobile.android.unicorn.domain.model.StockListing
+import app.unicornapp.mobile.android.unicorn.domain.model.CompanyListing
 import com.opencsv.CSVReader
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -11,11 +11,11 @@ import javax.inject.Singleton
 
 
 /**
- * StockListingsParser
+ * CompanyListingsParser
  */
 @Singleton
-class StockListsingsParser @Inject constructor(): CsvParser<StockListing> {
-    override suspend fun parse(stream: InputStream): List<StockListing> {
+class CompanyListingsParser @Inject constructor(): CsvParser<CompanyListing> {
+    override suspend fun parse(stream: InputStream): List<CompanyListing> {
         val csvReader = CSVReader(InputStreamReader(stream))
         return withContext(Dispatchers.IO) {
             csvReader.readAll()
@@ -24,7 +24,7 @@ class StockListsingsParser @Inject constructor(): CsvParser<StockListing> {
                     val symbol = line.getOrNull(0)
                     val name = line.getOrNull(1)
                     val exchange = line.getOrNull(2)
-                    StockListing(
+                    CompanyListing(
                         name = name ?: return@mapNotNull null,
                         symbol = symbol ?: return@mapNotNull null,
                         exchange = exchange ?: return@mapNotNull null
