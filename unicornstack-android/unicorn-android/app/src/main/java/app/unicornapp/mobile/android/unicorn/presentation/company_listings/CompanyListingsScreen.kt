@@ -49,21 +49,10 @@ fun CompanyListingsScreen(
     navController: NavController,
     viewModel: CompanyListingsViewModel = hiltViewModel()
 ) {
-    val refreshScope = rememberCoroutineScope()
-    var refreshing by remember { mutableStateOf(false) }
-    var itemCount by remember { mutableStateOf(15) }
-
-    fun refresh() = refreshScope.launch {
-        refreshing = true
-        delay(1500)
-        itemCount += 5
-        refreshing = false
-    }
-
-    val swipeRefreshState = rememberSwipeRefreshState(isRefreshing = viewModel.state.isRefreshing)
-
+    val swipeRefreshState = rememberSwipeRefreshState(
+        isRefreshing = viewModel.state.isRefreshing
+    )
     val state = viewModel.state
-
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
