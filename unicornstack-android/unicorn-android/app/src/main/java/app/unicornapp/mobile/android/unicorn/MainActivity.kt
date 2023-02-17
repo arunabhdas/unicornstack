@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Scaffold
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccountBox
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Notifications
@@ -100,6 +101,13 @@ fun MyApp(
                         route = "notification_screen",
                         contentDescription = "Navigate to Notifications",
                         icon = Icons.Default.Notifications
+                    ),
+                    MenuItem(
+                        id = "about",
+                        title = "About",
+                        route = "about_screen",
+                        contentDescription = "Navigate to About",
+                        icon = Icons.Default.AccountBox
                     )
                 ),
                 onItemClick = {menuItem ->

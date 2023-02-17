@@ -6,6 +6,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import app.unicornapp.mobile.android.unicorn.presentation.company_listings.CompanyListingsScreen
+import app.unicornapp.mobile.android.unicorn.presentation.screens.AboutScreen
 import app.unicornapp.mobile.android.unicorn.presentation.screens.ContactScreen
 import app.unicornapp.mobile.android.unicorn.presentation.screens.HomeScreen
 import app.unicornapp.mobile.android.unicorn.presentation.screens.HomeDetailScreen
@@ -37,6 +38,22 @@ fun SetupNavGraph(
         }
 
         composable(
+            route = Screen.ContactScreen.route
+        ) {
+            ContactScreen(
+                navController = navController
+            )
+        }
+
+        composable(
+            route = Screen.AboutScreen.route
+        ) {
+            AboutScreen(
+                navController = navController
+            )
+        }
+
+        composable(
             route = Screen.NotificationScreen.route
         ) {
             NotificationScreen(
@@ -44,13 +61,7 @@ fun SetupNavGraph(
             )
         }
 
-        composable(
-            route = Screen.ContactScreen.route
-        ) {
-            ContactScreen(
-                navController = navController
-            )
-        }
+
 
         composable(
             route = Screen.ServicesScreen.route
