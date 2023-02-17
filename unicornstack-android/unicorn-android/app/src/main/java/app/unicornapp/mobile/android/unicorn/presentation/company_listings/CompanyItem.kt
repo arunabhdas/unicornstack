@@ -66,5 +66,5 @@ fun CompanyItem (
 @Preview(name = "yellow square", group = "square")
 @Composable
 fun Preview_CompanyItem() {
-    CompanyItem(CompanyListing("Google", "GOOG", "NASDAQ"), )
+    CompanyItem(CompanyListing("Google", "GOOG", "NASDAQ") )
 }
