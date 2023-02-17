@@ -8,6 +8,8 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.create
@@ -22,9 +24,17 @@ object AppModule {
     @Provides
     @Singleton
     fun providesStockApi(): StocksApi {
+        val interceptor : HttpLoggingInterceptor = HttpLoggingInterceptor().apply {
+            level = HttpLoggingInterceptor.Level.BASIC
+        }
+
+        val client : OkHttpClient = OkHttpClient.Builder().apply {
+            addInterceptor(interceptor)
+        }.build()
         return Retrofit.Builder()
             .baseUrl(StocksApi.STOCKS_BASE_URL)
             .addConverterFactory(MoshiConverterFactory.create())
+            .client(client)
             .build()
             .create()
     }
