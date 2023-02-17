@@ -33,8 +33,10 @@ import app.unicornapp.mobile.android.unicorn.presentation.navigation.DrawerBody
 import app.unicornapp.mobile.android.unicorn.presentation.navigation.SetupNavGraph
 import app.unicornapp.mobile.android.unicorn.presentation.theme.UnicornTheme
 import app.unicornapp.mobile.android.unicorn.viewmodel.UnicornViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     lateinit var navController: NavController
     private val viewModel: UnicornViewModel by viewModels()
@@ -83,6 +85,13 @@ fun MyApp(
                         title = "Services",
                         route = "services_screen",
                         contentDescription = "Navigate to Services",
+                        icon = Icons.Default.Email
+                    ),
+                    MenuItem(
+                        id = "companies",
+                        title = "Companies",
+                        route = "company_listings_screen",
+                        contentDescription = "Navigate to Company Listings",
                         icon = Icons.Default.Email
                     ),
                     MenuItem(

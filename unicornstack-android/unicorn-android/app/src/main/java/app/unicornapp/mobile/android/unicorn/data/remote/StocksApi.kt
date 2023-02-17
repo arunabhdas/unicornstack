@@ -2,12 +2,14 @@ package app.unicornapp.mobile.android.unicorn.data.remote
 
 import app.unicornapp.mobile.android.unicorn.BuildConfig
 import okhttp3.ResponseBody
+import retrofit2.http.GET
 import retrofit2.http.Query
 
 /**
  * StockApi
  */
 interface StocksApi {
+    @GET("query?function=LISTING_STATUS")
     suspend fun getListings(
         @Query("apikey") apiKey: String = API_KEY
     ): ResponseBody

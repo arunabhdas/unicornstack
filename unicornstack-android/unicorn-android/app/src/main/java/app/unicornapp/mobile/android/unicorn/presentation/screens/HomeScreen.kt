@@ -73,6 +73,16 @@ fun HomeCard(
             fontWeight = FontWeight.Bold
         )
 
+        Text(
+            modifier = Modifier.clickable {
+                navController.navigate(route = Screen.CompanyListingsScreen.route)
+            },
+            text = "CompanyListingsScreen",
+            color = Color.White,
+            fontSize = MaterialTheme.typography.titleMedium.fontSize,
+            fontWeight = FontWeight.Bold
+        )
+
     }
 }
 
