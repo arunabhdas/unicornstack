@@ -50,9 +50,9 @@ fun CompanyListingsScreen(
     viewModel: CompanyListingsViewModel = hiltViewModel()
 ) {
     val swipeRefreshState = rememberSwipeRefreshState(
-        isRefreshing = viewModel.state.isRefreshing
+        isRefreshing = viewModel.uiState.isRefreshing
     )
-    val state = viewModel.state
+    val state = viewModel.uiState
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center

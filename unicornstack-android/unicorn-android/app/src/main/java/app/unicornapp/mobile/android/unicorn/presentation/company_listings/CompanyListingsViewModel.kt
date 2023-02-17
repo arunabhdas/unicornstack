@@ -20,7 +20,7 @@ import javax.inject.Inject
 class CompanyListingsViewModel @Inject constructor(
     private val repository: StockRepository
 ): ViewModel() {
-    var state by mutableStateOf(CompanyListingsState())
+    var uiState by mutableStateOf(CompanyListingsState())
 
     private var searchJob: Job? = null
 
@@ -34,7 +34,7 @@ class CompanyListingsViewModel @Inject constructor(
                 getCompanyListings(fetchFromRemote = true)
             }
             is CompanyListingsEvent.OnSearchQueryChange -> {
-                state = state.copy(searchQuery = event.query)
+                uiState = uiState.copy(searchQuery = event.query)
                 searchJob?.cancel()
                 searchJob = viewModelScope.launch {
                     delay(500L)
@@ -45,7 +45,7 @@ class CompanyListingsViewModel @Inject constructor(
     }
 
     private fun getCompanyListings(
-        query: String = state.searchQuery.lowercase(),
+        query: String = uiState.searchQuery.lowercase(),
         fetchFromRemote: Boolean = false
     ) {
         viewModelScope.launch {
@@ -55,8 +55,8 @@ class CompanyListingsViewModel @Inject constructor(
                     when (result) {
                         is Resource.Succes -> {
                             result.data?.let { listings ->
-                                state = state.copy(
-
+                                uiState = uiState.copy(
+                                    companies = listings
                                 )
                             }
                         }
@@ -64,7 +64,7 @@ class CompanyListingsViewModel @Inject constructor(
 
                         }
                         is Resource.Loading -> {
-                            state = state.copy(isLoading = result.isLoading)
+                            uiState = uiState.copy(isLoading = result.isLoading)
                         }
 
                     }

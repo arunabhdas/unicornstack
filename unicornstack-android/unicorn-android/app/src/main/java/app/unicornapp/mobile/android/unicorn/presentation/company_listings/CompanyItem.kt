@@ -18,6 +18,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import app.unicornapp.mobile.android.unicorn.domain.model.CompanyListing
+import app.unicornapp.mobile.android.unicorn.presentation.theme.TextWhite
 
 /**
  * CompanyItem
@@ -41,7 +42,7 @@ fun CompanyItem (
                     text = company.name,
                     fontWeight = FontWeight.Bold,
                     fontSize = 16.sp,
-                    color = MaterialTheme.colors.onBackground,
+                    color = TextWhite,
                     overflow = TextOverflow.Ellipsis,
                     maxLines = 1,
                     modifier = Modifier.weight(1f)
@@ -50,14 +51,14 @@ fun CompanyItem (
                 Text(
                     text = company.exchange,
                     fontWeight = FontWeight.Light,
-                    color = MaterialTheme.colors.onBackground
+                    color = TextWhite
                 )
             }
             Spacer(modifier = Modifier.height(8.dp))
             Text(
                 text = "(${company.symbol}",
                 fontStyle = FontStyle.Italic,
-                color = MaterialTheme.colors.onBackground
+                color = TextWhite
             )
         }
     }
